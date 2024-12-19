@@ -4,10 +4,10 @@ import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 import streamlit as st
-from dashboard.pages.user_overview import display_user_overview
-from dashboard.pages.engagement import display_engagement
-from dashboard.pages.experience import display_experience
-from dashboard.pages.satisfaction import display_satisfaction
+from pages.user_overview import display_user_overview
+from pages.engagement import display_engagement
+from pages.experience import display_experience
+from pages.satisfaction import display_satisfaction
 
 def main():
     st.title('User Engagement and Satisfaction Dashboard')
