@@ -1,7 +1,11 @@
 import pytest
-from src.engagement_clustering import cluster_engagement
+from src.engagement_clustering import perform_clustering, load_data
 
-def test_cluster_engagement():
-    data = pd.read_csv('../data/raw/user_data.csv')
-    clustered_data = cluster_engagement(data, n_clusters=3)
-    assert clustered_data['engagement_cluster'].nunique() == 3  # Ensure 3 clusters
+@pytest.fixture
+def data():
+    return load_data('data/processed/cleaned_data.csv')
+
+def test_clustering(data):
+    clustered_data = perform_clustering(data)
+    assert 'cluster' in clustered_data.columns
+    assert clustered_data['cluster'].nunique() == 3  # Check if there are 3 clusters

@@ -1,13 +1,15 @@
 #!/bin/bash
+# Run data preprocessing
+python3 src/data_preprocessing.py
 
-# Activate virtual environment
-source venv/bin/activate
+# Run clustering analysis
+python3 src/engagement_clustering.py
 
-# Preprocess data
-python src/data_preprocessing.py
+# Run experience analysis
+python3 src/experience_analysis.py
 
-# Run clustering
-python src/engagement_clustering.py
+# Run satisfaction model training
+python3 src/satisfaction_model.py
 
-# Train and evaluate model
-python src/satisfaction_model.py
+# Run user analysis
+python3 src/user_analysis.py

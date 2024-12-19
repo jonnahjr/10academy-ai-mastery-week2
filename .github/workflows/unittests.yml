@@ -1,31 +1,52 @@
 name: Run Unit Tests
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
-  unit_tests:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+steps:
+  - name: Checkout code
+    uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
+  - name: Set up Python
+    uses: actions/setup-python@v2
+    with:
+      python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
 
-      - name: Run unit tests
-        run: |
-          pytest --maxfail=1 --disable-warnings -q
+  - name: Run tests
+    run: |
+      pytest tests/
+
+
+
+### **11. `.gitignore`**
+Standard `.gitignore` file to avoid committing unnecessary files.
+
+```gitignore
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment
+venv/
+
+# VSCode settings
+.vscode/
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Data files (optional)
+data/raw/*
+data/processed/*
