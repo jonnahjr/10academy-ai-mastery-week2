@@ -1,5 +1,5 @@
 import pytest
-from src.engagement_clustering import perform_clustering, load_data
+from scripts.data_cleaning import perform_clustering, load_data
 
 @pytest.fixture
 def data():
